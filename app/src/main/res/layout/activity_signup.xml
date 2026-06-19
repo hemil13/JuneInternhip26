@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".SignupActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginBottom="30dp"
         android:gravity="center"
-        android:text="Login Here"
+        android:text="Create Account"
         android:textColor="#1F41BB"
         android:textSize="30dp"
         android:textStyle="bold" />
@@ -22,16 +22,37 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome Back You've\n Been missed!"
+        android:text="Create an account so you can explore all the existing jobs"
+        android:layout_marginHorizontal="20dp"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="18dp"
         />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:hint="Name"
+        android:layout_marginHorizontal="20dp"
+        android:padding="15dp"
+        android:background="@drawable/custom_background"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:hint="Email"
+        android:layout_marginHorizontal="20dp"
+        android:padding="15dp"
+        android:background="@drawable/custom_background"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Contact"
         android:layout_marginHorizontal="20dp"
         android:padding="15dp"
         android:background="@drawable/custom_background"
@@ -47,21 +68,20 @@
         android:background="@drawable/custom_background"
         />
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Forget Your Password?"
         android:layout_marginTop="20dp"
-        android:textSize="18dp"
+        android:hint="Confirm Password"
         android:layout_marginHorizontal="20dp"
-        android:gravity="end"
-        android:textColor="#1F41BB"
+        android:padding="15dp"
+        android:background="@drawable/custom_background"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create new Account"
+        android:text="Already Have An Account"
         android:textSize="18dp"
         android:layout_marginHorizontal="20dp"
         android:gravity="center"
@@ -71,7 +91,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign In"
+        android:text="Sign Up"
         android:layout_marginTop="50dp"
         android:layout_marginHorizontal="20dp"
         android:textSize="20dp"
