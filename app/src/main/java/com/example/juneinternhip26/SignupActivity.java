@@ -1,15 +1,20 @@
 package com.example.juneinternhip26;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -30,6 +35,7 @@ public class SignupActivity extends AppCompatActivity {
         contact_signup = findViewById(R.id.contact_signup);
         password_signup = findViewById(R.id.password_signup);
         confirm_password_signup = findViewById(R.id.confirm_password_signup);
+        signup_btn = findViewById(R.id.signup_btn);
 
         //button click
 
@@ -90,6 +96,26 @@ public class SignupActivity extends AppCompatActivity {
                 confirm_password_signup.requestFocus();
                 return;
             }
+            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show();
+
+
+
+//            Snackbar.make(view, "Account Created Successfully", Snackbar.LENGTH_SHORT).setAction("OK", view1 -> {
+//                Explicit Intent
+//                Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show();
+//            }).show();
+
+//            Snackbar.make(view, "Account Created Successfully", Snackbar.LENGTH_SHORT).setAction("OK", view1 -> {
+//                Implicit Intent
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/"));
+//                startActivity(intent);
+//                Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show();
+//            }).show();
+
         });
     }
 }

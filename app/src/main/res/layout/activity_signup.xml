@@ -48,6 +48,8 @@
         android:id="@+id/email_signup"
         android:inputType="textEmailAddress"
         android:layout_marginHorizontal="20dp"
+        android:drawableLeft="@drawable/email_svgrepo_com"
+        android:drawablePadding="8dp"
         android:padding="15dp"
         android:background="@drawable/custom_background"
         />
