@@ -29,16 +29,17 @@
         />
 
     <EditText
+        android:id="@+id/name_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:hint="Name"
-        android:id="@+id/name_signup"
-        android:inputType="text"
         android:layout_marginHorizontal="20dp"
-        android:padding="15dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/custom_background"
-        />
+        android:hint="Name"
+        android:drawableLeft="@drawable/user_svgrepo_com"
+        android:drawablePadding="8dp"
+        android:inputType="text"
+        android:padding="15dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -59,6 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="Contact"
+        android:drawableLeft="@drawable/contact_new_svgrepo_com"
+        android:drawablePadding="8dp"
         android:id="@+id/contact_signup"
         android:inputType="phone"
         android:layout_marginHorizontal="20dp"
@@ -72,6 +75,8 @@
         android:layout_marginTop="20dp"
         android:hint="Password"
         android:id="@+id/password_signup"
+        android:drawableLeft="@drawable/lock_svgrepo_com"
+        android:drawablePadding="8dp"
         android:inputType="textPassword"
         android:layout_marginHorizontal="20dp"
         android:padding="15dp"
@@ -84,6 +89,8 @@
         android:layout_marginTop="20dp"
         android:hint="Confirm Password"
         android:id="@+id/confirm_password_signup"
+        android:drawableLeft="@drawable/lock_svgrepo_com"
+        android:drawablePadding="8dp"
         android:inputType="textPassword"
         android:layout_marginHorizontal="20dp"
         android:padding="15dp"
