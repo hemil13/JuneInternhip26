@@ -1,6 +1,7 @@
 package com.example.juneinternhip26;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -22,11 +23,19 @@ public class SignupActivity extends AppCompatActivity {
     EditText name_signup, email_signup, contact_signup, password_signup, confirm_password_signup;
 
     Button signup_btn;
+
+    //DB
+    SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_signup);
+        //DB
+        db = openOrCreateDatabase("JuneInternhip26", MODE_PRIVATE, null);
+
+        String userTable = "CREATE TABLE IF NOT EXISTS user(userid INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR (50), email VARCHAR (100), contact VARCHAR (10), password VARCHAR (20))";
+        db.execSQL(userTable);
 
         //connect xml and java
 
@@ -52,54 +61,60 @@ public class SignupActivity extends AppCompatActivity {
                 return;
             }
 
-            if (email.isEmpty()){
+            else if (email.isEmpty()){
                 email_signup.setError("Enter an Email");
                 email_signup.requestFocus();
                 return;
             }
 
-            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                 email_signup.setError("Invalid Email");
                 email_signup.requestFocus();
                 return;
             }
 
-            if (contact.isEmpty()){
+            else if (contact.isEmpty()){
                 contact_signup.setError("Enter Contact Number");
                 contact_signup.requestFocus();
                 return;
             }
 
-            if (contact.length() != 10) {
+            else if (contact.length() != 10) {
                 contact_signup.setError("Contact Number Must be 10 Digits");
                 contact_signup.requestFocus();
                 return;
             }
 
-            if (password.isEmpty()){
+            else if (password.isEmpty()){
                 password_signup.setError("Enter Password");
                 password_signup.requestFocus();
                 return;
             }
-            if (password.length() < 6){
+            else if (password.length() < 6){
                 password_signup.setError("Password must be of at least 6 characters");
                 password_signup.requestFocus();
                 return;
             }
-            if (confirmPassword.isEmpty()){
+            else if (confirmPassword.isEmpty()){
                 confirm_password_signup.setError("Confirm Password");
                 confirm_password_signup.requestFocus();
                 return;
             }
-            if(!password.equals(confirmPassword)){
+            else if(!password.equals(confirmPassword)){
                 confirm_password_signup.setError("Password do not match");
                 confirm_password_signup.requestFocus();
                 return;
             }
-            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-            startActivity(intent);
-            Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show();
+            else {
 
+                //String userTable = "CREATE TABLE IF NOT EXISTS user(userid INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR (50), email VARCHAR (100), contact VARCHAR (10), password VARCHAR (20))";
+
+                String inserUser = "INSERT INTO user VALUES (NULL,'"+name+"' , '"+email+"' , '"+contact+"' , '"+password+"')";
+                db.execSQL(inserUser);
+
+                Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                startActivity(intent);
+                Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show();
 
 
 //            Snackbar.make(view, "Account Created Successfully", Snackbar.LENGTH_SHORT).setAction("OK", view1 -> {
@@ -115,6 +130,8 @@ public class SignupActivity extends AppCompatActivity {
 //                startActivity(intent);
 //                Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show();
 //            }).show();
+
+            }
 
         });
     }
