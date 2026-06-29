@@ -1,9 +1,14 @@
 package com.example.juneinternhip26;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -19,7 +24,14 @@ public class MainActivity extends AppCompatActivity {
     //Variables
     EditText emailLogin, passwordLogin;
 
+    TextView forgetPassword;
+
     Button loginBtn;
+
+    //DB
+    SQLiteDatabase db;
+
+    SharedPreferences sp;
 
 
     @Override
@@ -28,11 +40,26 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        //DB
+        db = openOrCreateDatabase("JuneInternhip26", MODE_PRIVATE, null);
+
+        String userTable = "CREATE TABLE IF NOT EXISTS user(userid INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR (50), email VARCHAR (100), contact VARCHAR (10), password VARCHAR (20))";
+        db.execSQL(userTable);
+
+        sp = getSharedPreferences("JuneInternship26", MODE_PRIVATE);
+
+
        //Connecct xml and java
 
         emailLogin = findViewById(R.id.email_login);
         passwordLogin = findViewById(R.id.password_login);
         loginBtn = findViewById(R.id.login_btn);
+        forgetPassword = findViewById(R.id.forget_password);
+
+        forgetPassword.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ForgetPasswordActivity.class);
+            startActivity(intent);
+        });
 
         loginBtn.setOnClickListener(view -> {
 
@@ -46,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                 emailLogin.setError("Invalid Email");
                 emailLogin.requestFocus();
                 return;
@@ -54,15 +81,37 @@ public class MainActivity extends AppCompatActivity {
 
             // Password
 
-            if(password.isEmpty()){
+            else if(password.isEmpty()){
                 passwordLogin.setError("Enter Password");
                 passwordLogin.requestFocus();
                 return;
             }
+            else if(password.length() < 6){
+                passwordLogin.setError("Password must be of at least 6 characters");
+                passwordLogin.requestFocus();
+                return;
+            }
+            else {
+                String checkUser = "SELECT * FROM user WHERE email = '"+email+"' AND password = '"+password+"'";
 
-            Snackbar.make(view, "Login Successful",Snackbar.LENGTH_SHORT).setAction("Ok", v -> {
-                Toast.makeText(MainActivity.this, "Welcome Back",Toast.LENGTH_SHORT).show();
-            }).show();
+                Cursor cursor = db.rawQuery(checkUser, null);
+                if(cursor.getCount() > 0){
+                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+
+                    sp.edit().putString("email", email).commit();
+
+                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
+                }
+
+
+//                Snackbar.make(view, "Login Successful", Snackbar.LENGTH_SHORT).setAction("Ok", v -> {
+//                    Toast.makeText(MainActivity.this, "Welcome Back", Toast.LENGTH_SHORT).show();
+//                }).show();
+            }
         });
 
 
