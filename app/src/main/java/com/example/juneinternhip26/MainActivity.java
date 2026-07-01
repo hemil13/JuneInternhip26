@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     //Variables
     EditText emailLogin, passwordLogin;
 
-    TextView forgetPassword;
+    TextView forgetPassword, createAccount;
 
     Button loginBtn;
 
@@ -41,12 +41,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //DB
-        db = openOrCreateDatabase("JuneInternhip26", MODE_PRIVATE, null);
+        db = openOrCreateDatabase(ConstantSp.pref, MODE_PRIVATE, null);
 
         String userTable = "CREATE TABLE IF NOT EXISTS user(userid INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR (50), email VARCHAR (100), contact VARCHAR (10), password VARCHAR (20))";
         db.execSQL(userTable);
 
-        sp = getSharedPreferences("JuneInternship26", MODE_PRIVATE);
+        sp = getSharedPreferences(ConstantSp.pref, MODE_PRIVATE);
 
 
        //Connecct xml and java
@@ -55,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
         passwordLogin = findViewById(R.id.password_login);
         loginBtn = findViewById(R.id.login_btn);
         forgetPassword = findViewById(R.id.forget_password);
+        createAccount = findViewById(R.id.create_new_account);
+
+        createAccount.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+            startActivity(intent);
+        });
+
 
         forgetPassword.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, ForgetPasswordActivity.class);
@@ -92,16 +99,25 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             else {
+
                 String checkUser = "SELECT * FROM user WHERE email = '"+email+"' AND password = '"+password+"'";
 
                 Cursor cursor = db.rawQuery(checkUser, null);
                 if(cursor.getCount() > 0){
-                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
-                    startActivity(intent);
 
-                    sp.edit().putString("email", email).commit();
 
-                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    while (cursor.moveToNext()) {
+                        sp.edit().putInt(ConstantSp.userid, cursor.getInt(0)).commit();
+                        sp.edit().putString(ConstantSp.name, cursor.getString(1)).commit();
+                        sp.edit().putString(ConstantSp.email, cursor.getString(2)).commit();
+                        sp.edit().putString(ConstantSp.contact, cursor.getString(3)).commit();
+                        sp.edit().putString(ConstantSp.password, cursor.getString(4)).commit();
+
+                        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                        startActivity(intent);
+
+                        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
                     Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();

@@ -30,14 +30,14 @@ public class DashboardActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_dashboard);
 
-        db = openOrCreateDatabase("JuneInternhip26", MODE_PRIVATE, null);
+        db = openOrCreateDatabase(ConstantSp.pref, MODE_PRIVATE, null);
 
         String userTable = "CREATE TABLE IF NOT EXISTS user(userid INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR (50), email VARCHAR (100), contact VARCHAR (10), password VARCHAR (20))";
         db.execSQL(userTable);
 
-        sp = getSharedPreferences("JuneInternship26", MODE_PRIVATE);
+        sp = getSharedPreferences(ConstantSp.pref, MODE_PRIVATE);
 
-        email = sp.getString("email", null);
+        email = sp.getString(ConstantSp.email, null);
 
 
         deleteProfile = findViewById(R.id.dashboard_delete);
