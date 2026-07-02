@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +19,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     //Variables
     TextView dashboard_welcome;
-    Button deleteProfile, logout;
+    Button deleteProfile, logout, profile;
 
     SharedPreferences sp;
 
@@ -45,6 +46,7 @@ public class DashboardActivity extends AppCompatActivity {
         deleteProfile = findViewById(R.id.dashboard_delete);
         logout = findViewById(R.id.dashboard_logout);
         dashboard_welcome = findViewById(R.id.dashboard_welcome);
+        profile = findViewById(R.id.dashboard_profile);
 
         dashboard_welcome.setText("Welcome "+sp.getString(ConstantSp.name, null));
 
@@ -68,10 +70,12 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+       profile.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+                Intent intent = new Intent(DashboardActivity.this, ProfileActivity.class);
+                startActivity(intent);
+           }
+       });
     }
 }
