@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -16,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class DashboardActivity extends AppCompatActivity {
 
     //Variables
+    TextView dashboard_welcome;
     Button deleteProfile, logout;
 
     SharedPreferences sp;
@@ -42,18 +44,26 @@ public class DashboardActivity extends AppCompatActivity {
 
         deleteProfile = findViewById(R.id.dashboard_delete);
         logout = findViewById(R.id.dashboard_logout);
+        dashboard_welcome = findViewById(R.id.dashboard_welcome);
+
+        dashboard_welcome.setText("Welcome "+sp.getString(ConstantSp.name, null));
+
 
         deleteProfile.setOnClickListener(view -> {
             String deleteProfile = "DELETE FROM user WHERE email = '"+email+"'";
             db.execSQL(deleteProfile);
             Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
             startActivity(intent);
+
+            sp.edit().clear().commit();
             Toast.makeText(this, "Profile Deleted Successfully", Toast.LENGTH_SHORT).show();
         });
 
         logout.setOnClickListener(view -> {
             Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
             startActivity(intent);
+
+            sp.edit().clear().commit();
             Toast.makeText(this, "Logout Successful", Toast.LENGTH_SHORT).show();
         });
 
