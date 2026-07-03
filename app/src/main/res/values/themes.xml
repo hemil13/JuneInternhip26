@@ -8,4 +8,32 @@
     </style>
 
     <style name="Theme.JuneInternhip26" parent="Base.Theme.JuneInternhip26" />
+
+
+    <style name="edit_15" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:background">@drawable/custom_background</item>
+    </style>
+
+    <style name="text_18" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="button_20" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
+        <item name="android:layout_marginTop">50dp</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@drawable/custom_button</item>
+    </style>
+
 </resources>

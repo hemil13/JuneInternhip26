@@ -73,6 +73,11 @@ public class ProfileActivity extends AppCompatActivity {
                         "WHERE userid = '"+sp.getInt(ConstantSp.userid,0)+"'";
                 db.execSQL(updateUser);
 
+                sp.edit().putString(ConstantSp.name, name.getText().toString()).commit();
+                sp.edit().putString(ConstantSp.email, email.getText().toString()).commit();
+                sp.edit().putString(ConstantSp.contact, contact.getText().toString()).commit();
+                sp.edit().putString(ConstantSp.password, password.getText().toString()).commit();
+
                 Toast.makeText(ProfileActivity.this, "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
 
 

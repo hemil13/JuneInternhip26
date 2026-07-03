@@ -112,8 +112,11 @@ public class SignupActivity extends AppCompatActivity {
                 String inserUser = "INSERT INTO user VALUES (NULL,'"+name+"' , '"+email+"' , '"+contact+"' , '"+password+"')";
                 db.execSQL(inserUser);
 
-                Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+//                startActivity(intent);
+                onBackPressed();
+
+
                 Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show();
 
 
