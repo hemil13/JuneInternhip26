@@ -19,7 +19,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     //Variables
     TextView dashboard_welcome;
-    Button deleteProfile, logout, profile;
+    Button deleteProfile, logout, profile, category;
 
     SharedPreferences sp;
 
@@ -47,6 +47,7 @@ public class DashboardActivity extends AppCompatActivity {
         logout = findViewById(R.id.dashboard_logout);
         dashboard_welcome = findViewById(R.id.dashboard_welcome);
         profile = findViewById(R.id.dashboard_profile);
+        category = findViewById(R.id.dashboard_category);
 
         dashboard_welcome.setText("Welcome "+sp.getString(ConstantSp.name, null));
 
@@ -75,6 +76,14 @@ public class DashboardActivity extends AppCompatActivity {
            public void onClick(View view) {
                 Intent intent = new Intent(DashboardActivity.this, ProfileActivity.class);
                 startActivity(intent);
+           }
+       });
+
+       category.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent intent = new Intent(DashboardActivity.this, CategoryActivity.class);
+               startActivity(intent);
            }
        });
     }
