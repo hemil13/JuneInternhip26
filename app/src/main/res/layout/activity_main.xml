@@ -20,11 +20,8 @@
         android:textStyle="bold" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/text_20"
         android:text="Welcome Back You've\n Been missed!"
-        android:gravity="center"
-        android:textSize="20dp"
         />
 
     <EditText

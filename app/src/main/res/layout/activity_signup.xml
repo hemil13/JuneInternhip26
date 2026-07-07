@@ -108,6 +108,7 @@
         />
 
     <Button
+        android:id="@+id/signup_btn"
         style="@style/button_20"
         app:backgroundTint="@null"
         android:text="Sign Up"
