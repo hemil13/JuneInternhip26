@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JuneInternhip26">
         <activity
+            android:name=".SubCategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".CategoryActivity"
             android:exported="false" />
         <activity
