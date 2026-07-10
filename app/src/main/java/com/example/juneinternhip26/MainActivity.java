@@ -1,13 +1,21 @@
 package com.example.juneinternhip26;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.text.method.TransformationMethod;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     TextView forgetPassword, createAccount;
 
     Button loginBtn;
+
+    ImageView hide, show;
 
     //DB
     SQLiteDatabase db;
@@ -56,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         loginBtn = findViewById(R.id.login_btn);
         forgetPassword = findViewById(R.id.forget_password);
         createAccount = findViewById(R.id.create_new_account);
+        hide = findViewById(R.id.password_hide);
+        show = findViewById(R.id.password_show);
 
         createAccount.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, SignupActivity.class);
@@ -131,11 +143,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        hide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hide.setVisibility(GONE);
+                show.setVisibility(VISIBLE);
+                passwordLogin.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+        });
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                show.setVisibility(GONE);
+                hide.setVisibility(VISIBLE);
+                passwordLogin.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
         });
     }
 }
