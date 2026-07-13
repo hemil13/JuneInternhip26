@@ -11,17 +11,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHolder> {
     Context context;
     int[] idArray;
     String[] nameArray;
     int[] imageArray;
 
-    public CategoryAdapter(Context context, int[] idArray, String[] nameArray, int[] imageArray) {
+    ArrayList<CategoryList> arrayList;
+
+//    public CategoryAdapter(Context context, int[] idArray, String[] nameArray, int[] imageArray) {
+//        this.context = context;
+//        this.idArray = idArray;
+//        this.nameArray = nameArray;
+//        this.imageArray = imageArray;
+//    }
+
+    public CategoryAdapter(Context context, ArrayList<CategoryList> arrayList) {
         this.context = context;
-        this.idArray = idArray;
-        this.nameArray = nameArray;
-        this.imageArray = imageArray;
+        this.arrayList = arrayList;
     }
 
     @NonNull
@@ -44,8 +53,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHold
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.MyHolder holder, int position) {
-        holder.category_image.setImageResource(imageArray[position]);
-        holder.category_name.setText(nameArray[position]);
+//        holder.category_image.setImageResource(imageArray[position]);
+//        holder.category_name.setText(nameArray[position]);
+        holder.category_image.setImageResource(arrayList.get(position).getImage());
+        holder.category_name.setText(arrayList.get(position).getName());
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +72,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHold
 
     @Override
     public int getItemCount() {
-        return nameArray.length;
+        return arrayList.size();
     }
 }

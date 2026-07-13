@@ -48,7 +48,6 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     public void onBindViewHolder(@NonNull SubCategoryAdapter.MyHolder holder, int position) {
         holder.category_image.setImageResource(imageArray[position]);
         holder.category_name.setText(nameArray[position]);
-
     }
 
     @Override
