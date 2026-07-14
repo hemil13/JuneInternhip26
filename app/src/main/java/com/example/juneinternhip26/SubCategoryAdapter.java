@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.MyHolder> {
 
     Context context;
@@ -18,12 +20,19 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     String[] nameArray;
     int[] imageArray;
 
-    public SubCategoryAdapter(Context context, int[] subIdArray, int[] catIdArray, String[] nameArray, int[] imageArray) {
+    ArrayList<SubCategoryList> arrayList;
+
+//    public SubCategoryAdapter(Context context, int[] subIdArray, int[] catIdArray, String[] nameArray, int[] imageArray) {
+//        this.context = context;
+//        this.subIdArray = subIdArray;
+//        this.catIdArray = catIdArray;
+//        this.nameArray = nameArray;
+//        this.imageArray = imageArray;
+//    }
+
+    public SubCategoryAdapter(Context context, ArrayList<SubCategoryList> arrayList) {
         this.context = context;
-        this.subIdArray = subIdArray;
-        this.catIdArray = catIdArray;
-        this.nameArray = nameArray;
-        this.imageArray = imageArray;
+        this.arrayList = arrayList;
     }
 
     @NonNull
@@ -46,12 +55,18 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull SubCategoryAdapter.MyHolder holder, int position) {
-        holder.category_image.setImageResource(imageArray[position]);
-        holder.category_name.setText(nameArray[position]);
+//        holder.category_image.setImageResource(imageArray[position]);
+//        holder.category_name.setText(nameArray[position]);
+
+        holder.category_image.setImageResource(arrayList.get(position).getSubImage());
+        holder.category_name.setText(arrayList.get(position).getSubName());
+
+
+
     }
 
     @Override
     public int getItemCount() {
-        return subIdArray.length;
+        return arrayList.size();
     }
 }

@@ -7,5 +7,7 @@ public class ConstantSp {
     public static final String email = "EMAIL";
     public static final String contact = "CONTACT";
     public static final String password = "PASSWORD";
+
+    public static final String categoryid = "CATEGORYID";
 }
 
