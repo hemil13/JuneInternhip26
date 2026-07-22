@@ -1,6 +1,7 @@
 package com.example.juneinternhip26;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +18,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder
 
     Context context;
     ArrayList<ProductList> arrayList;
+    SharedPreferences sp;
     public ProductAdapter(Context context, ArrayList<ProductList> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
-        SharedPreferences sp;
+        sp = context.getSharedPreferences(ConstantSp.pref, Context.MODE_PRIVATE);
     }
 
     @NonNull
@@ -49,6 +51,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder
         holder.originalPrice.setText(ConstantSp.rupees_symbol+arrayList.get(position).getOriginalPrice());
         holder.discountedPrice.setText(ConstantSp.rupees_symbol+arrayList.get(position).getDiscountPrice());
         holder.productImage.setImageResource(arrayList.get(position).getProductimage());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sp.edit().putString(ConstantSp.productid, String.valueOf(arrayList.get(position).getProductid())).commit();
+                sp.edit().putString(ConstantSp.subcategoryid, String.valueOf(arrayList.get(position).getSubcategoryid())).commit();
+                sp.edit().putString(ConstantSp.productname, arrayList.get(position).getProductname()).commit();
+                sp.edit().putString(ConstantSp.productimage, String.valueOf(arrayList.get(position).getProductimage())).commit();
+                sp.edit().putString(ConstantSp.originalprice, String.valueOf(arrayList.get(position).getOriginalPrice())).commit();
+                sp.edit().putString(ConstantSp.discountprice, String.valueOf(arrayList.get(position).getDiscountPrice())).commit();
+                sp.edit().putString(ConstantSp.productdescription, arrayList.get(position).getProductDescription()).commit();
+
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

@@ -13,6 +13,12 @@ public class ConstantSp {
     public static final String subcategoryid = "SUBCATEGORYID";
 
     public static final String productid = "PRODUCTID";
+    public static final String productname = "PRODUCTNAME";
+    public static final String productimage = "PRODUCTIMAGE";
+    public static final String originalprice = "ORIGINALPRICE";
+    public static final String discountprice = "DISCOUNTPRICE";
+    public static final String productdescription = "PRODUCTDESCRIPTION";
+
 
     public static final String rupees_symbol = "₹";
 }

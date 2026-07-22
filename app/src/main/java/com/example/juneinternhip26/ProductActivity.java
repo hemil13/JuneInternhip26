@@ -25,6 +25,8 @@ public class ProductActivity extends AppCompatActivity {
     int[] originalPrice = {30000,20000,10000,5000,4000,3000,2000,1000,500};
     int[] discountPrice = {25000,15000,9000,4500,3500,2500,1500,900,450};
 
+    String[] productDescription = {"One plus description", "Redmi description", "Sony description", "Noise description", "Airpods Max description", "Sony Headphones description", "Noise Aura description", "Boat 120 description", "Airpods Pro 2 description"};
+
     RecyclerView product_recycler;
 
     ArrayList<ProductList> arrayList;
@@ -51,7 +53,7 @@ public class ProductActivity extends AppCompatActivity {
         String subCategoryTable = "CREATE TABLE IF NOT EXISTS subcategory(subcategoryid INTEGER PRIMARY KEY AUTOINCREMENT, categoryid INTEGER, name VARCHAR (50), image VARCHAR (100))";
         db.execSQL(subCategoryTable);
 
-        String productTable = "CREATE TABLE IF NOT EXISTS product(productid INTEGER PRIMARY KEY AUTOINCREMENT, subcategoryid INTEGER, name VARCHAR (50), image VARCHAR (100), originalprice INTEGER, discountprice INTEGER)";
+        String productTable = "CREATE TABLE IF NOT EXISTS product(productid INTEGER PRIMARY KEY AUTOINCREMENT, subcategoryid INTEGER, name VARCHAR (50), image VARCHAR (100), originalprice INTEGER, discountprice INTEGER, description VARCHAR)";
         db.execSQL(productTable);
 
         product_recycler = findViewById(R.id.product_recycler);
@@ -61,7 +63,7 @@ public class ProductActivity extends AppCompatActivity {
             String checkSubcategory = "SELECT * FROM product WHERE name = '"+productname[i]+"' and subcategoryid = '"+subcategoryid[i]+"'";
             Cursor productCursor = db.rawQuery(checkSubcategory, null);
             if(productCursor.getCount() == 0){
-                String insertProduct = "INSERT INTO product VALUES(NULL, '"+subcategoryid[i]+"', '"+productname[i]+"', '"+productimage[i]+"', '"+originalPrice[i]+"', '"+discountPrice[i]+"')";
+                String insertProduct = "INSERT INTO product VALUES(NULL, '"+subcategoryid[i]+"', '"+productname[i]+"', '"+productimage[i]+"', '"+originalPrice[i]+"', '"+discountPrice[i]+"', '"+productDescription[i]+"')";
                 db.execSQL(insertProduct);
             }
         }
@@ -80,6 +82,7 @@ public class ProductActivity extends AppCompatActivity {
                 list.setProductimage(cursor.getInt(3));
                 list.setOriginalPrice(cursor.getInt(4));
                 list.setDiscountPrice(cursor.getInt(5));
+                list.setProductDescription(cursor.getString(6));
                 arrayList.add(list);
             }
 

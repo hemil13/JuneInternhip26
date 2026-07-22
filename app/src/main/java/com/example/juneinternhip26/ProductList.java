@@ -6,7 +6,6 @@ public class ProductList {
     String productname;
     int productimage;
     int originalPrice;
-    int discountPrice;
 
     public int getProductid() {
         return productid;
@@ -55,4 +54,16 @@ public class ProductList {
     public void setDiscountPrice(int discountPrice) {
         this.discountPrice = discountPrice;
     }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    int discountPrice;
+
+    String productDescription;
 }
